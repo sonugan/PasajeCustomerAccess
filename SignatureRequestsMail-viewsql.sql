@@ -1,19 +1,3 @@
-USE [CustomerAccessTest]
-GO
-
-/****** Object:  View [dbo].[SignatureRequestsMail]    Script Date: 11/04/2018 14:31:41 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-
-
-
-
-
-
 ALTER VIEW [dbo].[SignatureRequestsMail]
 AS
 SELECT s.ClientId, 
