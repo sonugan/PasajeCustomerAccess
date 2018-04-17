@@ -1,0 +1,42 @@
+﻿@model CustomerAccess.Model.Clients.Addresses
+
+<div class="modal fade" id="dir2Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="modal-title" style="font-weight:bold" id="myModalLabel">Dirección Legal/Fiscal</span>
+            </div>
+            <div class="modal-body">
+                <table id="tblDireccion2" class="table table-striped footable dt-responsive nowrap" cellspacing="0">
+                    <thead style="display:none">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Calle</td>
+                            <td>@Model.Address</td>
+                        </tr>
+                        <tr>
+                            <td>Localidad</td>
+                            <td>@Model.City</td>
+                        </tr>
+                        <tr>
+                            <td>CP</td>
+                            <td>@Model.ZipCode</td>
+                        </tr>
+                        <tr>
+                            <td>Provincia</td>
+                            <td>@Model.State</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

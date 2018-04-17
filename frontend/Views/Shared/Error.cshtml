@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Error";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html dir="ltr" lang="es-AR" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- metas -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="Content-Language" content="es-AR" />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="seguro, seguros" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Empresa internacional especializada en seguros de vida, seguros individuales y para empresas. Su objetivo es proteger la seguridad financiera de sus clientes, gracias a su larga trayectoria y a sus especializados Life Planners." />
+
+    <title>PRUDENTIAL SEGUROS - Customer Access</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/footable/footable.core.min.css" rel="stylesheet" />
+    <link href="~/Content/styles.css" rel="stylesheet">
+    <link href="/Content/datepicker.css" rel="stylesheet">
+    <link href="~/Content/prudential.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/smart-table.js"></script>
+    <script src="~/Scripts/linq.js"></script>
+    <script src="~/Scripts/Site.js" type="text/javascript"></script>
+
+
+
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="login-form">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm"}))
+                        {
+                        <section id="loginForm">
+                            <img src='@Url.Content("~/Content/img/logo2.png")' alt="Prudential">
+                            <br />
+                            <br />
+                            <p style="text-align:center"> <B>Ha ocurrido un error inesperado. Por favor ingrese nuevamente</B> </p>
+
+                            <br />
+                            <button type="submit" name="ingresar" class="btn btn-primary btn-block">Volver al Login</button>
+
+                        </section>
+                        }
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

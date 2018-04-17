@@ -1,0 +1,133 @@
+﻿@model  CustomerAccess.Model.Policies.Policies
+@{
+    ViewBag.Title = "Detalle de Póliza";
+}
+<link href="~/Content/Views/policy-detail.css" rel="stylesheet">
+<script src="~/Scripts/Views/policy-details.js"></script>
+<script src="~/Scripts/Views/policy-reports.js" type="text/javascript"></script>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <input hidden id="ApplicationId" value="@Model.ApplicationId.Trim()" />
+                <input hidden id="Currency" value="@Model.Currency" />
+                <div class="col-sm-8 col-xs-12">
+                    <label>Póliza Nro: </label><label>@Model.PolicyNumber</label>
+                    @{
+                        if (string.IsNullOrEmpty(Model.LastChangeDate.ToString()))
+                        {
+                            <label>- Fecha actualización: N/A</label >
+                        }
+                        else
+                        { 
+                            <label>- Fecha actualización: @Model.LastSystemUpdate.Value.ToString("dd/MM/yyyy")</label>
+                        }
+                    }
+                </div>
+                <div class="col-sm-4 col-xs-12 text-right">Life Planner: <a href="#" data-toggle="modal" data-target="#lpModal" style="text-decoration: underline">@{
+                    var LPFirstName = string.IsNullOrEmpty(Model.LPFirstName) ? "" : Model.LPFirstName;
+                    var LPLastName = string.IsNullOrEmpty(Model.LPLastName) ? "" : Model.LPLastName;
+
+                    var FullName = LPFirstName + " " + LPLastName;
+                }
+                @FullName</a></div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <!-- Tab panes -->
+            <div class="tab-content" width="100%">
+                <div class="tab-pane fade in active" id="A">
+                  
+                   
+                        <!-- Panel de Informacion de Poliza-->
+                        @Html.Partial("_InformationPolicy", Model)
+                    <div id="loadingDetails"></div>
+                    <div id="details" class="">
+                        <!-- Panel de Productos -->
+                        <div id="products"></div>
+                        <!--Beneficiarios -->
+                        <div id="beneficiaries"></div>
+                        <!--Detalle de pagos -->
+                        <div id="paymentsDetail"></div>
+                    </div>
+                        <!--Valores de cuentas y rescates -->
+                        @Html.Partial("_AccValuesAndRescues", Model)
+                        <!--Información Adicional -->
+                        @Html.Partial("_AdditionalInformation", Model)
+                   
+                    <!-- Buttons -->
+                    <div>
+                        <br />
+                        <br />
+                        <div class="well carousel-search">
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <h4 style="text-transform: none">Descargar Copia de Documentación</h4>
+                                </div>
+                            </div>
+                            <!-- Buttons -->
+                            <div class="row">
+                                <br>                         
+                                @*<div class="col-sm-4">
+                                    <button type="submit" id="btnAnual" class="btn btn-primary btn-block">Resumen Anual</button>
+                                    <br>
+                                </div>*@
+                                @{ if (Model.IsActive!=null && Model.IsActive==true)
+                                    {
+                                        <div class="col-sm-4">
+                                            <button type="submit" id="btnCobertura" class="btn btn-primary btn-block">Certificado de Cobertura</button>
+                                            <br>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <button type="submit" id="btnClausula" class="btn btn-primary btn-block">Cláusula No Repetición</button>
+                                            <br>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                @Html.Partial("~/Views/Policies/Modal/_LifePlanner.cshtml", Model)
+                @Html.Partial("~/Views/Policies/Modal/_Payment.cshtml", Model)
+                @Html.Partial("Modal/_PaymentDetailsReport")
+                @Html.Partial("Modal/_NonRepetitionClouseReport")
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Info -->
+    <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="modalInfo">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                    <h4 class="modal-title" id="modalInfoTitle"></h4>
+                </div>*@
+                <div id="modalInfoText" class="modal-body" @*style="display: inline"*@>
+                </div>
+                <div class="modal-footer">
+                    <button id="modalInfoBtnOk" type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Processing -->
+    <div id="loaderModal" class="modal fade" data-backdrop="static">
+        <div class="modal-dialog" role="document">
+            <div class="row">
+                <div class="col-lg-4 col-sm-4 col-xs-4">
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4">
+                    <div class="loader">
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-xs-4">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

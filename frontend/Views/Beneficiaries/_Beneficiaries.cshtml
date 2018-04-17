@@ -1,0 +1,137 @@
+﻿@model ICollection<CustomerAccess.Model.Clients.Beneficiaries>
+
+<link href="~/Content/Views/beneficiaries-paymentdetails.css" rel="stylesheet">
+<script src="~/Scripts/Views/beneficiaries.js"></script>
+
+<div class="panel panel-default">
+    <div role="button" class="panel-heading panel-prud" data-toggle="collapse" data-parent="#accordion" href="#collapseBenef" aria-expanded="false" aria-controls="collapseBenef" id="headingOne">
+        <span class="panel-title">
+            <i id="iconBenef" class="indicator glyphicon glyphicon-chevron-down pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapseBenef" aria-expanded="false" aria-controls="collapseBenef"></i>
+            <a class="titulo-panel">Beneficiarios</a>
+        </span>
+    </div>
+    <div id="collapseBenef" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+            <div class="col-sm-12 col-md-3 pull-left margen-columna">
+                <table class="table-condensed footable margen-tabla">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="margen-label-mostrar">Mostrar</label>
+                            </td>
+                            <td>
+                                <div class="form-group margen-formgroup" >
+                                    <select class="pointer" id="change-page-size2">
+                                        <option value="10" selected="selected">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <label class="margen-label-registros">registros</label>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-3 pull-right">
+                <input id="filter2" class="form-control" placeholder="Buscar" type="text" />
+            </div>
+            <table id="tblBeneficiarios" class="table table-striped footable dt-responsive nowrap toggle-circle" data-filter-text-only="true" data-filter="#filter2" data-page-navigation=".pagination" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-center">Beneficiario</th>
+                        <th data-hide="phone" class="text-center">Tipo</th>
+                        <th class="text-center">Relación</th>
+                        <th data-hide="phone" class="text-center">%</th>
+                        <th data-hide="phone" class="text-center">Designación</th>
+                        <th data-hide="tablet,phone" class="text-center">Documento</th>
+                        <th data-toggle="true" data-sort-ignore="true"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model == null || Model.Count == 0)
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center">No existe información a mostrar</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr class="text-center">
+                                    <td class="text-left">@item.LastName.ToUpper() @(item.FirstName != null ? item.FirstName.ToUpper() : "" )</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Relation)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Pct)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Designation_ES)</td>
+                                    @if (item.DocNum != null && item.DocNum != "")
+                                    {
+                                        <td>@item.DocType @item.DocNumberMask</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                    <td></td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="noExl">
+                        <td colspan="7" class="text-center">
+                            <ul class="pagination pagination-centered hide-if-no-paging"></ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+            <table id="tblBeneficiariosHidden" class="hidden">
+                <thead>
+                    <tr>
+                        <th>Beneficiario</th>
+                        <th>Tipo</th>
+                        <th>Relación</th>
+                        <th>%</th>
+                        <th>Designación</th>
+                        <th>Documento</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.LastName.ToUpper() @(item.FirstName != null ? item.FirstName.ToUpper() : "" )</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Relation)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Pct)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Designation_ES)</td>
+                                    @if (item.DocNum != null && item.DocNum != "")
+                                    {
+                                        <td>@item.DocType @item.DocNumberMask</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                    <td></td>
+                                </tr>
+                            }
+                        
+                    }
+                </tbody>
+            </table>
+            <br />
+            <div class="boton-excel">
+                <button type="button" class="btn btn-primary btn-block" id="BtnExportBenefits">Excel</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,156 @@
+﻿@model IEnumerable<CustomerAccess.Model.Policies.Policies>
+
+<link href="~/Content/Views/active-policies.css" rel="stylesheet">
+<script src="~/Scripts/Views/_policies.js"></script>
+
+<div id="divActivas overflow-x">
+    <div class="col-sm-5 col-md-3 pull-right">
+        <input id="filter1" class="form-control" placeholder="Buscar" type="text" />
+    </div>
+    <table class="table table-striped footable dt-responsive nowrap toggle-circle col-md-12" data-filter-text-only="true" cellspacing="0" id="tblactivas" data-filter="#filter1" data-page-navigation=".pagination">
+        @{
+            if (Model == null || Model.Count() == 0)
+            {
+                <thead class="text-center">
+                    <tr>No se encontraron Pólizas</tr>
+                </thead>
+            }
+            else
+            {
+                <thead>
+                    <tr>
+                        <th class="text-center">Póliza</th>
+
+                        @{
+                            if (@Model.ElementAt(0).IsActive.HasValue && @Model.ElementAt(0).IsActive.Value)
+                            {
+                                <th data-hide="phone" data-sortable="false" class="text-center">Requiere aceptación</th>
+                            }
+                        }
+                        
+                        <th data-hide="tablet, phone" class="text-center">Tomador</th>
+                        <th data-hide="tablet, phone" class="text-center">Asegurado</th>
+                        <th data-type="numeric" data-hide="tablet, phone" class="text-center">Emisión</th>
+                        <th class="text-center">Estado</th>
+                        @{ 
+                            if (@Model.ElementAt(0).StatusPol == "Prorrogada" || @Model.ElementAt(0).StatusPol == "Saldada" || @Model.ElementAt(0).StatusPol == "Vigente")
+                            {
+                                <th data-hide="tablet, phone" class="text-center">Cobertura</th>
+                                <th data-hide="tablet, phone" class="text-center">Prima</th>
+                            }
+                        }
+                        <th data-toggle="true" data-sort-ignore="true"></th>
+                        <th data-sort-ignore="true" class="text-center noExl">
+                            <input type="checkbox" name="columnCheck" id="checkAll" onchange="checkBoxes(this)" onclick="doalert(this)" />
+                        </th>
+                    </tr>
+                </thead>
+            }
+        }
+        <tbody>
+            @{
+                if (Model == null)
+                {
+                    <tr class="text-center"><td>No se encontraron Pólizas</td></tr>
+                }
+                else
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr class="text-center">
+                            <td><a href='@Url.Action("PolicyDetail", "Policies", new { isActive = item.IsActive, idApp = item.ApplicationId })'><u>@item.PolicyNumber</u></a></td>
+
+                            @{
+                                if (item.IsActive.HasValue && item.IsActive.Value)
+                                {
+                                    <td>
+                                        @foreach (var p in ViewData["PoliciesPendingSignature"] as List<string>)
+                                        {
+                                            //COMPARO QUITANDO LOS CEROS DE LA IZQUIERDA PORQUE ASI VIENE DESDE VISUAL TIME
+                                            if (p.TrimStart(new Char[] { '0' }).Equals(item.PolicyNumber.TrimStart(new Char[] { '0' })))
+                                            {
+                                                <button type="button" class="btn btn-success" onclick='window.location.href = BaseAddress + "SigningOfDocuments/Index?policyNumber=@item.PolicyNumber";'>Ver y firmar</button>
+                                            }
+                                        }
+                                    </td>
+                                }
+                            }
+
+                            <td>@Html.DisplayFor(modelItem => item.Clients.FullName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.InsuredClient.FullName)</td>
+                            <td data-value="@item.EmmissionDate.Value.ToString("yyyyMMdd")">@Html.DisplayFor(modelItem => item.EmmissionDate)</td>
+                            <td>@Html.DisplayFor(modelItem => item.StatusPol)</td>
+                            @{
+                                if (@item.StatusPol == "Prorrogada" || @item.StatusPol == "Saldada" || @item.StatusPol == "Vigente")
+                                {
+                                    <td>@item.Currency @String.Format("{0:#,##0}", @item.SumInsured)</td>
+                                    <td>@item.Currency @String.Format("{0:#,##0.00}", @item.PremiumTot)</td>
+                                }
+                            }
+                            <td></td>
+                            <td class="noExl" data-ignore="false">
+                                <input type="checkbox" name="recordar" value=@item.ApplicationId id="selector" onclick="doalert(this)" />
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr class="noExl">
+                <td colspan="9" class="text-center">
+                    <ul class="pagination pagination-centered hide-if-no-paging"></ul>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+    <table class="hidden" id="tblactivasHidden">
+        <thead>
+            <tr>
+                <th>Póliza</th>
+                @{
+                    if (@Model.Any() && @Model.ElementAt(0).IsActive.HasValue && @Model.ElementAt(0).IsActive.Value)
+                    {
+                        <th>Requiere aceptación</th>
+                    }
+                }
+                <th>Tomador</th>
+                <th>Asegurado</th>
+                <th>Emisión</th>
+                <th>Estado</th>
+                @{ 
+                    if (Model == null || Model.Count() == 0 || @Model.ElementAt(0).StatusPol == "Prorrogada" || @Model.ElementAt(0).StatusPol == "Saldada" || @Model.ElementAt(0).StatusPol == "Vigente")
+                    {
+                        <th>Cobertura</th>
+                        <th>Prima</th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a href='@Url.Action("PolicyDetail", "Policies", new { isActive = item.IsActive, idApp = item.ApplicationId })'><u>@item.PolicyNumber</u></a></td>
+
+                        <td>@Html.DisplayFor(modelItem => item.Clients.FullName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.InsuredClient.FullName)</td>
+                        <td data-value="@item.EmmissionDate.Value.ToString("yyyyMMdd")">@Html.DisplayFor(modelItem => item.EmmissionDate)</td>
+                        <td>@Html.DisplayFor(modelItem => item.StatusPol)</td>
+                        @{ 
+                            if (@item.StatusPol == "Prorrogada" || @item.StatusPol == "Saldada" || @item.StatusPol == "Vigente")
+                            {
+                                <td>@item.Currency @String.Format("{0:#,##0}", @item.SumInsured)</td>
+                                <td>@item.Currency @String.Format("{0:#,##0.00}", @item.PremiumTot)</td>
+                            }
+                        }
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div class="boton-excel">
+    <button type="button" id="BtnExportPolicies" class="btn btn-primary btn-block">Excel</button>
+</div>

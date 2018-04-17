@@ -1,0 +1,38 @@
+﻿@model IEnumerable<CustomerAccess.Model.Documentations.Faqs>
+
+@{
+    ViewBag.Title = "Preguntas Frecuentes";
+}
+<link href="~/Content/Views/faqs.css" rel="stylesheet">
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading panel-prud"> <span class="panel-title" ;">@ViewBag.Title</span> </div>
+        <div class="panel-body">
+            <div id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach (var item in Model)
+                {
+
+                    var name = "collapse" + item.Id;
+                    var nameref = "#collapse" + item.Id;
+                    var nameh = "heading" + item.Id;
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id=@nameh>
+                            <span class="panel-title">
+
+
+                                <a data-toggle="collapse" data-parent="#accordion" href=@nameref aria-expanded="true" aria-controls=@name>
+                                    @item.Title
+                                </a>
+
+                            </span>
+                        </div>
+                        <div id=@name class="panel-collapse collapse margin" role="tabpanel" aria-labelledby=@nameh>@item.Description </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>

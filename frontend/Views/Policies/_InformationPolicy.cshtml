@@ -1,0 +1,712 @@
+﻿@model CustomerAccess.Model.Policies.Policies
+
+<script src="~/Scripts/Views/_InformationPolicy.js"></script>
+
+<div class="panel panel-default">
+    <div role="button" class="panel-heading panel-prud" data-toggle="collapse" data-parent="#accordion" href="#collapsePol" aria-expanded="false" aria-controls="collapsePol" id="headingOne">
+        <span class="panel-title panel-collapsed">
+            <a class="titulo-panel">
+                Póliza Nro @Model.PolicyNumber
+            </a><i id="iconPol" class="indicator glyphicon glyphicon-chevron-up pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapsePol" aria-expanded="false" aria-controls="collapsePol"></i>
+        </span>
+    </div>
+    <div id="collapsePol" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <table id="datos1" class="table table-striped footable dt-responsive" data-page-size="20" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th data-sort-ignore="true"></th>
+                                <th data-sort-ignore="true"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tomador</td>
+                                <td>@Model.Clients.FullName</td>
+                            </tr>
+                            <tr>
+                                <td>Asegurado</td>
+                                <td>@Model.InsuredClient.FullName</td>
+                            </tr>
+                            <tr>
+                                <td>Estado</td>
+                                <td>@Model.StatusPol</td>
+                            </tr>
+                            <tr>
+                                <td>Vigencia</td>
+                                <td>@Model.StartDate.Value.ToString("dd/MM/yyyy")</td>
+                            </tr>
+                            <tr>
+                                <td>Vencimiento de póliza</td>
+                                <td>@Model.EndDate.AsDateTime().ToString("dd/MM/yyyy")</td>
+                            </tr>
+                            <tr>
+                                <td>Último Estado</td>
+                                @{
+                                    if (string.IsNullOrEmpty(Model.LastChangeDate.ToString()))
+                                    {
+                                        <td>N/A</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.LastChangeDate.Value.ToString("dd/MM/yyyy")</td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                <td>Frecuencia</td>
+                                <td>@Model.BillMode</td>
+                            </tr>
+                            <tr>
+                                <td>Moneda</td>
+                                <td>@Model.Currency</td>
+                            </tr>
+                            <tr>
+                                <td>Medio de Pago</td>
+                                <td> <a href="#" data-toggle="modal" data-target="#myModal" class="underline"> @Model.PaymentMethod</a> </td>
+                            </tr>
+                            <tr>
+                                <td>Autopago de primas desde los Fondos Acumulados</td>
+                                @{
+                                    if (Model.AutomaticPayment == null || Model.AutomaticPayment == "N")
+                                    {
+                                        <td>No</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Si</td>
+                                    }
+                                }
+                            </tr>
+                            <tr>
+                                <td> <b>Monto Total de la Cobertura *</b> </td>
+                                @{
+                                    if (Model.SumInsured == null)
+                                    {
+                                        <td>@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td><b>@Model.Currency @String.Format("{0:#,##0}", @Model.SumInsured)</b></td>
+                                    }
+                                }
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <label> <small> * No incluye el monto de cobertura de Cláusulas Adicionales opcionales. </small></label>
+                    <br>
+                    <br>
+                </div>
+                @if (ViewBag.Active == "1")
+                {
+                <div class="col-sm-6">
+                    <table id="datos2" class="table table-striped footable dt-responsive" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th data-sort-ignore="true"></th>
+                                <th data-sort-ignore="true"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Subtotal Prima</td>
+                                @{
+                                    if (Model.Premium == null)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right">@Model.Currency @String.Format("{0:#,##0.00}", @Model.Premium)</td>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td>Aportes Adicionales</td>
+                                @{
+                                    if (Model.CashEnhac == null)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right">@Model.Currency @String.Format("{0:#,##0.00}", @Model.CashEnhac)</td>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td>Impuesto de Sellos</td>
+                                @{
+                                    if (Model.StampTax == null)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right">@Model.Currency @String.Format("{0:#,##0.00}", @Model.StampTax)</td>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td>Impuestos SSN</td>
+                                @{
+                                    if (Model.SSNTax == null)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right">@Model.Currency @String.Format("{0:#,##0.00}", @Model.SSNTax)</td>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td>Impuestos IIBB</td>
+                                @{
+                                    if (Model.IIBBTax == null)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right">@Model.Currency @String.Format("{0:#,##0.00}", @Model.IIBBTax)</td>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td>IVA</td>
+                                @{
+                                    if (!Model.IVA.HasValue)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right">@Model.Currency @String.Format("{0:#,##0.00}", @Model.IVA.Value)</td>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td>Gastos Administrativos</td>
+                                @{
+                                    if (Model.PolicyFee == null)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right">@Model.Currency @String.Format("{0:#,##0.00}", @Model.PolicyFee)</td>
+                                    }
+                                }
+
+                            </tr>
+                            <tr>
+                                <td> <b>Prima Total</b> </td>
+                                @{
+                                    if (Model.PremiumTot == null)
+                                    {
+                                        <td style="text-align:right">@Model.Currency 0,00</td>
+                                    }
+                                    else
+                                    {
+                                        <td style="text-align:right"><b>@Model.Currency @String.Format("{0:#,##0.00}", @Model.PremiumTot)</b></td>
+                                    }
+                                }
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <label> <small>En caso de que adeudes el pago de una prima, por favor comunicate con tu asesor Life Planner® o con Atención al asegurado. </small></label>
+                </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <!--<button id="btnUpdateFrecuencyPaymentMeans" type="button" class="btn btn-primary" style="float: right;">Modificar Frecuencia y Medio de pago</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalFrecuencyPaymentMeans" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de Frecuencia y Medio de pago</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+            <div class="modal-body">
+                <form id="" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="">Datos de la póliza seleccionada Nro.:</label> <label>9999999999999</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="">Frecuencia de pago: <label>Semestral</label></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="">Medio de pago: <label>Tarjeta de Crédito</label></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="">Pagado Hasta (PTD): <label>DD/MM/AAAA</label></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12 text-center">
+                            <div class="panel panel-primary" style="margin-bottom: 0px;">
+                                <div class="panel-body" style="padding: 5px;">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12 col-lg-12">
+                                            <label>Período habilitado para solicitar cambio de frecuencia de pago</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12 col-lg-12">
+                                            <label>Desde: 01/01/0001</label> - <label>Hasta: 01/01/0001</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="max-width: 100%" />
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for=""><u>Asignar nueva frecuencia de pago a:</u></label>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="FrecuencyOptions" id="inlineRadio1" value="option1">Mensual
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="FrecuencyOptions" id="inlineRadio2" value="option2">Semestral
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="FrecuencyOptions" id="inlineRadio3" value="option3">Anual
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-xs-2 col-md-2 col-lg-2 text-center">
+                            <i class="glyphicon glyphicon-warning-sign" style="font-size:50px; color: yellowgreen;"></i>
+                        </div>
+                        <div class="col-xs-10 col-md-10 col-lg-10">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                    <label style="font-size: small; color: red;">El cambio de frecuencia modifica el importe de aportes adicionales en la misma proporción</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                    <label style="font-size: small; color: red;">Se cobrará el remanente para completar el período seleccionado.</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr style="max-width: 100%" />
+
+                    <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for=""><u>Asignar nuevo medio de pago con:</u></label>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label class="radio-inline">
+                                <input type="radio" name="PaymentMeansOptions" id="inlineRadio1" data-collapse="CollapseCreditCard" checked="checked" value="option1" onclick="paymentMeansCollapses.paymentMeansOptionsClick(this);">Tarjeta de Crédito
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="PaymentMeansOptions" id="inlineRadio2" data-collapse="CollapseBankDeposit" value="option2" onclick="paymentMeansCollapses.paymentMeansOptionsClick(this);">Depósito Bancario
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="PaymentMeansOptions" id="inlineRadio3" data-collapse="CollapseDirectDebit" value="option3" onclick="paymentMeansCollapses.paymentMeansOptionsClick(this);">Débito Directo
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-xs-2 col-md-2 col-lg-2 text-center">
+                            <i class="glyphicon glyphicon-warning-sign" style="font-size:50px; color: yellowgreen;"></i>
+                        </div>
+                        <div class="col-xs-10 col-md-10 col-lg-10">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-12 col-lg-12">
+                                    <label style="font-size: small; color: red;">Los depósitos bancarios solo son aceptados para las frecuencias de pago Semestral o Anual.</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="CollapseCreditCard" class="collapse in">
+                        <hr style="max-width: 100%" />
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <label for=""><u>Tarjeta de Crédito:</u></label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5 col-lg-5">
+                                <div class="form-group">
+                                    <label for="CreditCardType" class="col-sm-12 col-md-4 col-lg-4 control-label">Tipo TC:</label>
+                                    <div class="col-sm-12 col-md-8 col-lg-8">
+                                        <select class="form-control" id="CreditCardType">
+                                            <option disabled selected value="-1"> -- Seleccione -- </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <div class="form-group">
+                                    <label for="Bank" class="col-sm-12 col-md-4 col-lg-4 control-label">Banco emisor:</label>
+                                    <div class="col-sm-12 col-md-8 col-lg-8">
+                                        <select class="form-control" id="Bank">
+                                            <option disabled selected value="-1"> -- Seleccione -- </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <div class="col-sm-12 col-md-3 col-lg-3">
+                                        <label for="asd" class="col-sm-12 col-md-12 col-lg-12 control-label" style="text-align: left;">Nro. de Tarjeta:</label>
+                                    </div>
+                                    <div class="col-sm-6 col-md-2 col-lg-2">
+                                        <input type="text" class="form-control" id="asd" name="" maxlength="50" placeholder="">
+                                    </div>
+                                    <div class="col-sm-6 col-md-2 col-lg-2">
+                                        <input type="text" class="form-control" id="" name="" maxlength="50" placeholder="">
+                                    </div>
+                                    <div class="col-sm-6 col-md-2 col-lg-2">
+                                        <input type="text" class="form-control" id="" name="" maxlength="50" placeholder="">
+                                    </div>
+                                    <div class="col-sm-6 col-md-2 col-lg-2">
+                                        <input type="text" class="form-control" id="" name="" maxlength="50" placeholder="">
+                                    </div>
+                                    <div class="col-sm-0 col-md-1 col-lg-1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+
+                                <div class="col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-12 col-md-12 col-lg-12 control-label" style="text-align: left;">Fecha vto.:</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="Names" class="col-sm-4 col-md-4 col-lg-4 control-label">Mes:</label>
+                                        <div class="col-sm-8 col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" id="Names" name="" maxlength="2" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-2 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="Names" class="col-sm-4 col-md-4 col-lg-4 control-label">Año:</label>
+                                        <div class="col-sm-8 col-md-8 col-lg-8">
+                                            <input type="text" class="form-control" id="Names" name="" maxlength="2" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label for="Names" class="col-sm-7 col-md-7 col-lg-7 control-label">Código de seguridad:</label>
+                                        <div class="col-sm-5 col-md-5 col-lg-5">
+                                            <input type="text" class="form-control" id="Names" name="" maxlength="4" placeholder="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <label for=""><u>Pagador:</u></label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="Names" class="col-sm-12 col-md-2 col-lg-2 control-label">Nombre/s:</label>
+                                    <div class="col-sm-12 col-md-10 col-lg-10">
+                                        <input type="text" class="form-control" id="Names" name="" maxlength="50" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="Surnames" class="col-sm-12 col-md-2 col-lg-2 control-label">Apellido/s:</label>
+                                    <div class="col-sm-12 col-md-10 col-lg-10">
+                                        <input type="text" class="form-control" id="Surnames" name="" maxlength="50" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="form-group">
+                                    <label for="" class="col-sm-12 col-md-3 col-lg-3 control-label"  style="text-align: left;">Razón Social:</label>
+                                    <div class="col-sm-12 col-md-9 col-lg-9">
+                                        <input type="text" class="form-control" id="" name="" maxlength="50" placeholder="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-xs-2 col-md-2 col-lg-2 text-center">
+                                <i class="glyphicon glyphicon-warning-sign" style="font-size:50px; color: yellowgreen;"></i>
+                            </div>
+                            <div class="col-xs-10 col-md-10 col-lg-10">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12 col-lg-12">
+                                        <label style="font-size: small; color: red;">La identificación del Pagador deberá coincidir con la identificación del Tomador de la Polizá.</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-12 col-lg-12">
+                                        <label style="font-size: small; color: red;">El débito será realizado en la fecha seleccionada o el día hábil anterior.</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="CollapseBankDeposit" class="collapse in">
+                        <hr style="max-width: 100%" />
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <label for=""><u>Depósito Bancario:</u></label>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+                    <div id="CollapseDirectDebit" class="collapse in">
+                        <hr style="max-width: 100%" />
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <label for=""><u>Débito Directo:</u></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-3" for="pwd">Tipo de Cuenta:</label>
+                            <div class="col-sm-9">
+                                <label class="radio-inline">
+                                    <input type="radio" name="CtaTypeOptions" id="inlineRadio1" checked="checked" value="option1" onclick="">Cuenta Corriente
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="CtaTypeOptions" id="inlineRadio2" value="option2" onclick="">Caja de Ahorro
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="cta">Nro. Cuenta:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="cta" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="cta">Banco:</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="CreditCardType">
+                                    <option disabled selected value="-1"> -- Seleccione -- </option>
+                                </select>
+                            </div>
+
+                            <label class="control-label col-sm-2" for="sucursal">Sucursal:</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="sucursal" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="cbu">CBU:</label>
+                            <div class="col-sm-5">
+                                <input type="text" class="form-control" id="cbu" placeholder="">
+                            </div>
+
+                            <label class="control-label col-sm-3" for="ddate">Fecha de débito:</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="ddate" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-12 col-lg-12">
+                                <label for=""><u>Débito Directo:</u></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="name1">Nombre/s:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name1" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="surname1">Apellido/s:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="surname1" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="rsocial">Razón Social:</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="rsocial" placeholder="">
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </form>
+
+
+                        
+           @*<hr style="max-width: 100%" />
+
+            <div class="form-group row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <label for="nombreapellido"><u>Advertencia: El nombre y apellido del Pagador deberá corresponder
+                        con el nombre y apellido del Tomador de la polizá.</u></label>
+                </div>
+            </div>
+
+            <hr style="max-width: 100%" />
+
+            <div class="form-group row">
+                <div class="col-xs-4 col-md-4 col-lg-4">
+                    <label for=""><u>Tarjeta de Credito:</u></label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    <label for="modalHAddressProvince">Tipo TC</label>
+                    <select class="form-control" id="" name="">
+                        <option disabled selected value="-1"> -- Seleccione -- </option>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-md-6 col-lg-6">
+                    <label for="modalHAddressProvince">Banco Emisor</label>
+                    <select class="form-control" id="" name="">
+                        <option disabled selected value="-1"> -- Seleccione -- </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <label for="">Nro. de Tarjeta </label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-xs-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="7" placeholder="Nombre y apellido">
+                </div>
+                <div class="col-xs-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="7" placeholder="Nombre y apellido">
+                </div>
+                <div class="col-xs-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="7" placeholder="Nombre y apellido">
+                </div>
+                <div class="col-xs-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="7" placeholder="Nombre y apellido">
+                </div>
+            </div>
+
+            <hr style="max-width: 100%" />
+
+            <div class="form-group row">
+                <div class="col-xs-4 col-md-4 col-lg-4">
+                    <label for="nombreapellido">Nombre y apellido:</label>
+                </div>
+                <div class="col-xs-8 col-md-8 col-lg-8">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="30" placeholder="Nombre y apellido">
+                </div>
+            </div>
+
+            <hr style="max-width: 100%" />
+
+            <div class="form-group row">
+                <div class="col-xs-1 col-md-1 col-lg-1">
+                    <label for="nombreapellido">Mes:</label>
+                </div>
+                <div class="col-xs-2 col-md-2 col-lg-2">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="30" placeholder="Nombre y apellido">
+                </div>
+                <div class="col-xs-1 col-md-1 col-lg-1">
+                    <label for="nombreapellido">Año:</label>
+                </div>
+                <div class="col-xs-2 col-md-2 col-lg-2">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="30" placeholder="Nombre y apellido">
+                </div>
+
+                <div class="col-xs-3 col-md-3 col-lg-3">
+                    <label for="nombreapellido">Código de seguridad:</label>
+                </div>
+                <div class="col-xs-3 col-md-3 col-lg-3">
+                    <input type="text" class="form-control" id="nombreapellido" name="nombreapellido" maxlength="30" placeholder="Nombre y apellido">
+                </div>
+            </div>
+
+            <hr style="max-width: 100%" />*@
+
+            </div>
+                
+            <div class="modal-footer">
+                <button id="" type="button" class="btn btn-primary">Modificar</button>
+                <button id="" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>    
+            </div>
+
+        </div>
+    </div>
+</div>

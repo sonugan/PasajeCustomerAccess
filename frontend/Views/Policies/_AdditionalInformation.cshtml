@@ -1,0 +1,623 @@
+﻿@model  CustomerAccess.Model.Policies.Policies
+
+<script src="~/Scripts/Views/_AdditionalInformation.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
+<div class="panel panel-default">
+    <div class="panel-heading panel-prud" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo" id="headingOne">
+        <span class="panel-title">
+            <a class="titulo-panel">
+                Información Adicional
+            </a><i id="iconInfo" class="indicator glyphicon glyphicon-chevron-down pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapseInfo" aria-expanded="false" aria-controls="collapseInfo"></i>
+        </span>
+    </div>
+    <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+            <br />
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="well well-sm">
+                        <p>Información de contacto de la póliza</p>
+                    </div>
+                    <table id="datos3" class="table table-striped dt-responsive" cellspacing="0">
+                        <thead class="display-none">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dirección Particular</td>
+                                @{
+                                    if (@Model.Clients.PersonalAddress != null)
+                                    {
+                                        <td><a href="#" data-toggle="modal" data-target="#dir2Modal" class="underline"> @Model.Clients.PersonalAddress.Address</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                }
+                                <td><!--<button id="btnUpdateModalHAddress" class="btn btn-default"><i class="glyphicon glyphicon-pencil" id="btnUpdateModalHAddress"></button>--></td>
+
+                            </tr>
+                            <tr>
+                                <td>Dirección Legal/Fiscal</td>
+                                @{
+                                    if (@Model.Clients.LegalTaxAddress != null)
+                                    {
+                                        <td><a href="#" data-toggle="modal" data-target="#dir2Modal" class="underline"> @Model.Clients.LegalTaxAddress.Address</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                }
+                                <td><!--<button id="btnUpdateModalLAddress" class="btn btn-default"><i class="glyphicon glyphicon-pencil" id="btnUpdateModalHAddress"></button>--></td>
+                            </tr>
+                            <tr>
+                                <td>Dirección de correspondencia</td>
+                                @{
+                                    if (@Model.Clients.MailingAddress != null)
+                                    {
+                                        <td><a href="#" data-toggle="modal" data-target="#dirModal" class="underline"> @Model.Clients.MailingAddress.Address</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                }
+                                <td><!--<button id="btnUpdateModalCAddress" class="btn btn-default"><i class="glyphicon glyphicon-pencil" id="btnUpdateModalHAddress"></button>--></td>
+                            </tr>
+                            <tr>
+                                <td>e-mail</td>
+                                @{
+                                    if (@Model.Clients.EMail != null)
+                                    {
+                                        <td><a href='mailto:@Model.Clients.EMail' target="_top">@Model.Clients.EMail</a></td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                }
+                                <td><!--<button id="btnUpdateModalMail" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></button>--></td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono Particular</td>
+                                @{
+                                    if (@Model.Clients.PhoneMask != null)
+                                    {
+                                        <td>@Model.Clients.PhoneMask</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                }
+                                <td><!--<button id="btnUpdateModalHPhone" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></button>--></td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono Celular</td>
+                                @{
+                                    if (@Model.Clients.CelularPhone != null)
+                                    {
+                                        <td>@Model.Clients.CelularPhoneMask</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                }
+                                <td><!--<button id="btnUpdateModalCPhone" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></button>--></td>
+                            </tr>
+                            <tr>
+                                <td>Teléfono Laboral</td>
+                                @{
+                                    if (@Model.Clients.OfficePhone != null)
+                                    {
+                                        <td>@Model.Clients.OfficePhoneMask</td>
+                                    }
+                                    else
+                                    {
+                                        <td>No informa.</td>
+                                    }
+                                }
+                                <td><!--<button id="btnUpdateModalJPhone" class="btn btn-default"><i class="glyphicon glyphicon-pencil"></button>--></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <div class="well well-sm">
+                        <p>Datos del Tomador</p>
+                    </div>
+                    <table id="datos4" class="table table-striped dt-responsive" cellspacing="0">
+                        <thead class="display-none">
+                            <tr>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                <tr>
+                                    <td>Fecha de nacimiento</td>
+                                    @if (Model.Clients.DateOfBirth == null)
+                                    {
+                                        <td>N/A</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.Clients.DateOfBirth.Value.ToString("dd/MM/yyyy")</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Tipo de Documento</td>
+                                    @if (string.IsNullOrEmpty(Model.Clients.DocType))
+                                    {
+                                        <td>N/A</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@String.Format("{0:0,0}", @Model.Clients.DocType)</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Número de Documento</td>
+                                    @if (string.IsNullOrEmpty(Model.Clients.DocNumber))
+                                    {
+                                        <td>N/A</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.Clients.DocNumberMask</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Sexo</td>
+                                    @if (string.IsNullOrEmpty(Model.Clients.Sex))
+                                    {
+                                        <td>N/A</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.Clients.Sex</td>
+                                    }
+                                </tr>
+                                <tr>
+                                    <td>Estado Civil</td>
+                                    @if (string.IsNullOrEmpty(Model.Clients.MaritalStatus))
+                                    {
+                                        <td>N/A</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@Model.Clients.MaritalStatus</td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+    if (!string.IsNullOrEmpty(Model.MailingAddress))
+    {
+        @Html.Partial("~/Views/Policies/Modal/_CorrespondenceAddress.cshtml", Model)
+    }
+    if (Model.Clients.LegalTaxAddress != null)
+    {
+        @Html.Partial("~/Views/Policies/Modal/_LegalTaxAddress.cshtml", Model.Clients.LegalTaxAddress)
+    }
+}
+
+<div id="modalHAddress" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de Dirección Particular</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px;">
+                <form id="modalHAddressForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="modalHAddressStreet">Calle</label>
+                            <input type="text" class="form-control" id="modalHAddressStreet" name="modalHAddressStreet" maxlength="50" placeholder="Calle">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalHAddressFloor">Piso</label>
+                            <input type="text" maxlength="3" class="form-control" id="modalHAddressFloor" name="modalHAddressFloor" placeholder="Piso" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalHAddressApartment">Depto</label>
+                            <input type="text" class="form-control" id="modalHAddressApartment" name="modalHAddressApartment" maxlength="10" placeholder="Depto">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalHAddressLocality">Localidad</label>
+                            <input type="text" class="form-control" id="modalHAddressLocality" name="modalHAddressLocality" maxlength="30" placeholder="Localidad">
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalHAddressZipCode">Código Postal</label>
+                            <input type="text" maxlength="4" class="form-control" id="modalHAddressZipCode" name="modalHAddressZipCode" placeholder="Código postal" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalHAddressProvince">Provincia</label>
+                            <select class="form-control" id="modalHAddressProvince" name="modalHAddressProvince">
+                                <option disabled selected value="-1"> -- Seleccione -- </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalHAddressCountry">País</label>
+                            <input type="text" readonly="readonly" class="form-control" id="modalHAddressCountry" value="Argentina">
+                        </div>
+                    </div>
+                    <div id="modalHAddressCheckDiv" class="checkbox">
+                        <label class="conditions"><input id="modalHAddressCheck" name="modalHAddressCheck" type="checkbox" />En mi carácter de Tomador, hago constar que actúo en nombre propio, que he leído todas las preguntas y respuestas contenidas
+                            en este formulario, las cuales, a mi leal saber y entender, son correctas, completas y verdaderas, y fueron fielmente registradas.
+                            La aceptación de Prudential Seguros S.A. de los cambios solicitados en la presente solicitud se notificarán en la documentación que la
+                            Compañía remita al Tomador y el cambio será efectivo a partir de la fecha de su aceptación.</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveModalHAddress" type="button" class="btn btn-primary">Modificar</button>
+                <button id="btnCloseModalHAddress" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalLAddress" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de Dirección Legal/Fiscal</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <label class="warning">
+                                <u>ADVERTENCIA:</u> El cambio de domicilio fiscal del Asegurador podría
+                                modificar el importe de la prima de la presente Póliza  de Seguro de Vida,
+                                en caso de corresponder algún impuesto.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px;">
+                <form id="modalLAddressForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="modalLAddressStreet">Calle</label>
+                            <input type="text" class="form-control" id="modalLAddressStreet" name="modalLAddressStreet" maxlength="50" placeholder="Calle">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalLAddressFloor">Piso</label>
+                            <input type="text" maxlength="3" class="form-control" id="modalLAddressFloor" name="modalLAddressFloor" placeholder="Piso" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalLAddressApartment">Depto</label>
+                            <input type="text" class="form-control" id="modalLAddressApartment" name="modalLAddressApartment" maxlength="10" placeholder="Depto">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalLAddressLocality">Localidad</label>
+                            <input type="text" class="form-control" id="modalLAddressLocality" name="modalLAddressLocality" maxlength="30" placeholder="Localidad">
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalLAddressZipCode">Código Postal</label>
+                            <input type="text" maxlength="4" class="form-control" id="modalLAddressZipCode" name="modalLAddressZipCode" placeholder="Código postal" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalLAddressProvince">Provincia</label>
+                            <select class="form-control" id="modalLAddressProvince" name="modalLAddressProvince">
+                                <option disabled selected value="-1"> -- Seleccione -- </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalLAddressCountry">País</label>
+                            <input type="text" readonly="readonly" class="form-control" id="modalLAddressCountry" value="Argentina">
+                        </div>
+                    </div>
+                    <div id="modalLAddressCheckDiv" class="checkbox">
+                        <label class="conditions">
+                            <input id="modalLAddressCheck" name="modalLAddressCheck" type="checkbox" />En mi carácter de Tomador, hago constar que actúo en nombre propio, que he leído todas las preguntas y respuestas contenidas
+                            en este formulario, las cuales, a mi leal saber y entender, son correctas, completas y verdaderas, y fueron fielmente registradas.
+                            La aceptación de Prudential Seguros S.A. de los cambios solicitados en la presente solicitud se notificarán en la documentación que la
+                            Compañía remita al Tomador y el cambio será efectivo a partir de la fecha de su aceptación.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveModalLAddress" type="button" class="btn btn-primary">Modificar</button>
+                <button id="btnCloseModalLAddress" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalCAddress" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de Dirección Correspondencia</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px;">
+                <form id="modalCAddressForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="modalCAddressStreet">Calle</label>
+                            <input type="text" class="form-control" id="modalCAddressStreet" name="modalCAddressStreet" maxlength="50" placeholder="Calle">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalCAddressFloor">Piso</label>
+                            <input type="text" maxlength="3" class="form-control" id="modalCAddressFloor" name="modalCAddressFloor" placeholder="Piso" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalCAddressApartment">Depto</label>
+                            <input type="text" class="form-control" id="modalCAddressApartment" name="modalCAddressApartment" maxlength="10" placeholder="Depto">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalCAddressLocality">Localidad</label>
+                            <input type="text" class="form-control" id="modalCAddressLocality" name="modalCAddressLocality" maxlength="30" placeholder="Localidad">
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalCAddressZipCode">Código Postal</label>
+                            <input type="text" maxlength="4" class="form-control" id="modalCAddressZipCode" name="modalCAddressZipCode" placeholder="Código postal" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalCAddressProvince">Provincia</label>
+                            <select class="form-control" id="modalCAddressProvince" name="modalCAddressProvince">
+                                <option disabled selected value="-1"> -- Seleccione -- </option>
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalCAddressCountry">País</label>
+                            <input type="text" readonly="readonly" class="form-control" id="modalCAddressCountry" value="Argentina">
+                        </div>
+                    </div>
+                    <div id="modalCAddressCheckDiv" class="checkbox">
+                        <label class="conditions">
+                            <input id="modalCAddressCheck" name="modalCAddressCheck" type="checkbox" />En mi carácter de Tomador, hago constar que actúo en nombre propio, que he leído todas las preguntas y respuestas contenidas
+                            en este formulario, las cuales, a mi leal saber y entender, son correctas, completas y verdaderas, y fueron fielmente registradas.
+                            La aceptación de Prudential Seguros S.A. de los cambios solicitados en la presente solicitud se notificarán en la documentación que la
+                            Compañía remita al Tomador y el cambio será efectivo a partir de la fecha de su aceptación.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveModalCAddress" type="button" class="btn btn-primary">Modificar</button>
+                <button id="btnCloseModalCAddress" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalMail" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de e-mail</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px;">
+                <form id="modalMailForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="modalEmail">E-mail</label>
+                            <input type="text" maxlength="50" class="form-control" id="modalEmail" name="modalEmail" placeholder="Ingrese la nueva dirección de e-mail">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                            <label for="modalEmailConfirm">Repetir e-mail</label>
+                            <input type="text" maxlength="50" class="form-control" id="modalEmailConfirm" name="modalEmailConfirm" onpaste="return false;" placeholder="Reingrese la nueva dirección de e-mail">
+                        </div>
+                    </div>
+
+                    <div id="modalMailCheckDiv" class="checkbox">
+                        <label class="conditions">
+                            <input id="modalMailCheck" name="modalMailCheck" type="checkbox" />En mi carácter de Tomador, hago constar que actúo en nombre propio, que he leído todas las preguntas y respuestas contenidas
+                            en este formulario, las cuales, a mi leal saber y entender, son correctas, completas y verdaderas, y fueron fielmente registradas.
+                            La aceptación de Prudential Seguros S.A. de los cambios solicitados en la presente solicitud se notificarán en la documentación que la
+                            Compañía remita al Tomador y el cambio será efectivo a partir de la fecha de su aceptación.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveModalMail" type="button" class="btn btn-primary">Modificar</button>
+                <button id="btnCloseModalMail" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalHPhone" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de Teléfono Particular</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px;">
+                <form id="modalHPhoneForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <label for="modalHPhoneCountryCode">Código país</label>
+                            <input type="text" maxlength="3" class="form-control" id="modalHPhoneCountryCode" name="modalHPhoneCountryCode" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <label for="modalHPhoneProvinceCode">Código provincia</label>
+                            <input type="text" maxlength="5" class="form-control" id="modalHPhoneProvinceCode" name="modalHPhoneProvinceCode" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <label for="modalHPhoneNumber">Número</label>
+                            <input type="text" maxlength="12" class="form-control" id="modalHPhoneNumber" name="modalHPhoneNumber" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                    </div>
+                    <div id="modalHPhoneCheckDiv" class="checkbox">
+                        <label class="conditions">
+                            <input id="modalHPhoneCheck" name="modalHPhoneCheck" type="checkbox" />En mi carácter de Tomador, hago constar que actúo en nombre propio, que he leído todas las preguntas y respuestas contenidas
+                            en este formulario, las cuales, a mi leal saber y entender, son correctas, completas y verdaderas, y fueron fielmente registradas.
+                            La aceptación de Prudential Seguros S.A. de los cambios solicitados en la presente solicitud se notificarán en la documentación que la
+                            Compañía remita al Tomador y el cambio será efectivo a partir de la fecha de su aceptación.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveModalHPhone" type="button" class="btn btn-primary">Modificar</button>
+                <button id="btnCloseModalHPhone" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalCPhone" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de Teléfono Celular</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px;">
+                <form id="modalCPhoneForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <label for="modalCPhoneCountryCode">Código país</label>
+                            <input type="text" maxlength="3" class="form-control" id="modalCPhoneCountryCode" name="modalCPhoneCountryCode" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <label for="modalCPhoneProvinceCode">Código provincia</label>
+                            <input type="text" maxlength="5" class="form-control" id="modalCPhoneProvinceCode" name="modalCPhoneProvinceCode" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-4 col-lg-4">
+                            <label for="modalCPhoneNumber">Número</label>
+                            <input type="text" maxlength="12" class="form-control" id="modalCPhoneNumber" name="modalCPhoneNumber" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                    </div>
+                    <div id="modalCPhoneCheckDiv" class="checkbox">
+                        <label class="conditions">
+                            <input id="modalCPhoneCheck" name="modalCPhoneCheck" type="checkbox" />En mi carácter de Tomador, hago constar que actúo en nombre propio, que he leído todas las preguntas y respuestas contenidas
+                            en este formulario, las cuales, a mi leal saber y entender, son correctas, completas y verdaderas, y fueron fielmente registradas.
+                            La aceptación de Prudential Seguros S.A. de los cambios solicitados en la presente solicitud se notificarán en la documentación que la
+                            Compañía remita al Tomador y el cambio será efectivo a partir de la fecha de su aceptación.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveModalCPhone" type="button" class="btn btn-primary">Modificar</button>
+                <button id="btnCloseModalCPhone" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modalJPhone" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 text-center">
+                            <h4 class="modal-title">Modificación de Teléfono Laboral</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="padding-bottom: 0px;">
+                <form id="modalJPhoneForm">
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalJPhoneCountryCode">Código país</label>
+                            <input type="text" maxlength="3" class="form-control" id="modalJPhoneCountryCode" name="modalJPhoneCountryCode" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalJPhoneProvinceCode">Código provincia</label>
+                            <input type="text" maxlength="5" class="form-control" id="modalJPhoneProvinceCode" name="modalJPhoneProvinceCode" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalJPhoneNumber">Número</label>
+                            <input type="text" maxlength="12" class="form-control" id="modalJPhoneNumber" name="modalJPhoneNumber" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                        <div class="col-xs-12 col-md-6 col-lg-6">
+                            <label for="modalJInternalNumber">Número interno</label>
+                            <input type="text" maxlength="4" class="form-control" id="modalJInternalNumber" name="modalJInternalNumber" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57" />
+                        </div>
+                    </div>
+                    <div id="modalJPhoneCheckDiv" class="checkbox">
+                        <label class="conditions">
+                            <input id="modalJPhoneCheck" name="modalJPhoneCheck" type="checkbox" />En mi carácter de Tomador, hago constar que actúo en nombre propio, que he leído todas las preguntas y respuestas contenidas
+                            en este formulario, las cuales, a mi leal saber y entender, son correctas, completas y verdaderas, y fueron fielmente registradas.
+                            La aceptación de Prudential Seguros S.A. de los cambios solicitados en la presente solicitud se notificarán en la documentación que la
+                            Compañía remita al Tomador y el cambio será efectivo a partir de la fecha de su aceptación.
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btnSaveModalJPhone" type="button" class="btn btn-primary">Modificar</button>
+                <button id="btnCloseModalJPhone" type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,240 @@
+﻿
+@{
+    ViewBag.Title = "Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading panel-prud">
+            <span class="panel-title">Transacciones</span>
+        </div>
+        <div class="panel-body">
+            <div class="container">
+
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-2 col-lg-2" for="email">Tipo de Transacción:</label>
+                        <div class="col-sm-4 col-md-4 col-lg-4">
+                            <select id="selectTransactionType" class="selectpicker form-control" multiple>
+                                @foreach (var type in ViewBag.TransactionTypes as Dictionary<int, string>)
+                                {
+                                    <option value="@type.Key">@(type.Value)</option>
+                                }
+                            </select>
+                        </div>
+
+                        <label class="control-label col-sm-1 col-md-1 col-lg-1" for="email">Pólizas:</label>
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <select id="selectPolicies" class="selectpicker form-control" multiple>
+                                @foreach (var p in ViewBag.Policies as Dictionary<string, string>)
+                                {
+                                    <option value="@p.Key">@(p.Value)</option>
+                                }
+                            </select>
+                        </div>
+
+                        <label class="control-label col-sm-0 col-md-0 col-lg-0" for="findTransactions"></label>
+                        <div class="col-sm-1 col-md-1 col-lg-1">
+                            <button id="findTransactions" type="button" class="btn btn-primary">Buscar</button>
+                        </div>                    
+                    </div>
+                </form>
+
+               
+               <div class="table-responsive" style="padding-top: 25px;">
+                    @*<table class="table table-striped footable dt-responsive nowrap toggle-circle col-md-12" data-filter-text-only="true" cellspacing="0" data-filter="#filter1" data-page-navigation=".pagination">*@
+                    <table id="tableTrabsactions" class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nro de Solicitud</th>
+                                <th class="text-center">Póliza</th>
+                                <th class="text-center">Tipo de transacción</th>
+                                <th class="text-center">Fecha de Solicitud</th>
+                                <th class="text-center">Estado</th>
+                                <th class="text-center">Detalle</th>
+                            </tr>
+                        </thead>
+                        <tbody id="TRequestsTableBody">
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal de Direcciones*@
+<div id="modalAddress" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="" class="table" style="margin-bottom: 0px;">
+                    <thead>
+                        <tr class="text-center">
+                            <td colspan="2">
+                                <h4 id="modalAddressTitle" class="modal-title"></h4>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Calle</td>
+                            <td id="modalAddressStreet"></td>
+                        </tr>
+                        <tr>
+                            <td>Piso</td>
+                            <td id="modalAddressFloor"></td>
+                        </tr>
+                        <tr>
+                            <td>Depto</td>
+                            <td id="modalAddressApartment"></td>
+                        </tr>
+                        <tr>
+                            <td>Localidad</td>
+                            <td id="modalAddressLocality"></td>
+                        </tr>
+                        <tr>
+                            <td>Código Postal</td>
+                            <td id="modalAddressZipCode"></td>
+                        </tr>
+                        <tr>
+                            <td>Provincia</td>
+                            <td id="modalAddressProvince"></td>
+                        </tr>
+                        <tr>
+                            <td>País</td>
+                            <td id="modalAddressCountry"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top: 0px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal de Teléfonos*@
+<div id="modalPhones" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="" class="table" style="margin-bottom: 0px;">
+                    <thead>
+                        <tr class="text-center">
+                            <td colspan="2">
+                                <h4 id="modalPhonesTitle" class="modal-title"></h4>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Código país</td>
+                            <td id="modalPhonesCountryCode"></td>
+                        </tr>
+                        <tr>
+                            <td>Código provincia</td>
+                            <td id="modalPhonesProvinceCode"></td>
+                        </tr>
+                        <tr>
+                            <td>Número</td>
+                            <td id="modalPhonesNumber"></td>
+                        </tr>
+                        <tr id="modalPhonesInternalNumberRow" style="display:none;">
+                            <td>Número interno</td>
+                            <td id="modalPhonesInternalNumber"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top: 0px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal de Email*@
+<div id="modalEmails" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <table id="" class="table" style="margin-bottom: 0px;">
+                    <thead>
+                        <tr class="text-center">
+                            <td colspan="2">
+                                <h4 id="modalEmailsTitle" class="modal-title">Email</h4>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Email</td>
+                            <td id="modalEmailsEmail"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" style="margin-top: 0px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Modal de Documentación Pendiente de Firma*@
+<div id="modalDocumentPendingSignature" class="modal fade" tabindex="-1" data-backdrop="static">
+    <div class="modal-dialog" role="document" style="width:auto">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="modalDocumentPendingSignatureTitle" class="modal-title text-center"></h4>
+            </div>
+            <div class="modal-body">
+                <div style="overflow-x:auto;">
+                    <table class="table text-center" style="margin-bottom: 0px;">
+                        <thead>
+                            <tr>
+                                <td>Tipo de Documento</td>
+                                <td>Nombre del Documento</td>
+                                <td>Firmante</td>
+                                <td>Estado "Firma On Line"</td>
+                                <td>Fecha "Firma On Line"</td>
+                                <td>Usuario "Firma On Line"</td>
+                                <td>Estado "Firma Presencial"</td>
+                                <td>Fecha "Firma Presencial"</td>
+                                <td>Usuario "Firma Presencial"</td>
+                            </tr>
+                        </thead>
+                        <tbody id="tBodyDocumentPendingSignature">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" style="margin-top: 0px;">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<!-- Modal Processing -->
+<div id="loaderModal" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+                <div class="loader">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/Views/transaction.js" type="text/javascript"></script>

@@ -1,0 +1,234 @@
+﻿@model IList<CustomerAccess.FrontEnd.Models.DocumentPendingSignatureModel>
+
+@{
+    ViewBag.Title = "Documentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum DocumentPendingSignatureType = (CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum)ViewData["DocumentPendingSignatureType"];}
+
+<style>
+
+/*Media query por la descripción del boton que tiene el texto muy largo*/
+@@media only screen and (max-width: 400px) {
+    .responsive-button {
+        font-size: 3vw;
+    }
+}
+
+</style>
+
+<div class="container-fluid">
+
+    <div class="panel panel-default">
+        <div class="panel-heading panel-prud">
+            <span class="panel-title">Póliza Nro.: @ViewData["policyNumber"]</span><span class="panel-title"> - Se requiere aceptar la siguiente documentación.</span>
+        </div>
+        <div class="panel-body">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-sm-0 col-md-1 col-lg-1">
+                    </div>
+                    <div class="col-sm-12 col-md-10 col-lg-10 text-center" style="font-size:small;">
+
+                        @switch (DocumentPendingSignatureType)
+                        {
+                            case CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaSoloTomador:
+                                <p>Es necesario que leas y aceptes esta documentación para que tu póliza de seguro permanezca vigente antes de cumplirse la fecha límite de aceptación.</p>
+                                <p>Recordá que tenés disponible tu póliza en la sección Comunicaciones</p>
+                                break;
+
+                            case CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaTomadorYOtros:
+                                <p>Es necesario que leas y aceptes esta documentación para que tu póliza de seguro permanezca vigente antes de cumplirse la fecha límite de aceptación.</p>
+                                <p>Tené en cuenta que hay documentación adicional que requiere de la firma del Asegurado de la Póliza, para lo cual tu Life Planner los va a estar contactando.</p>
+                                <p>La firma de esta documentación adicional no tiene ningún impacto en la vigencia de la póliza.</p>
+                                <p>Recordá que tenés disponible tu póliza en la sección Comunicaciones.</p>
+                                break;
+
+                            case CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.EnmiendasSAFSoloTomador:
+                                <p>Es necesario que leas y aceptes esta documentación relacionada con los cambios solicitados en tu póliza.</p>
+                                break;
+
+                            case CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.EnmiendasSAFTomadorYOtros:
+                                <p>Es necesario que leas y aceptes esta documentación relacionada con los cambios solicitados en tu póliza.</p>
+                                <p>Tené en cuenta que hay documentación adicional que requiere de la firma del Asegurado de la Póliza, para lo cual tu Life Planner los va a estar contactando.</p>
+                                <p>La firma de esta documentación adicional no tiene ningún impacto en la vigencia de la póliza.</p>
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                    </div>
+                    <div class="col-sm-0 col-md-1 col-lg-1">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="table-responsive">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Documento</th>
+                                        <th>Firmante</th>
+                                        <th>Tipo de contenido</th>
+                                        <th>Fecha de emisión</th>
+                                        <th>Estado</th>
+
+                                        @*Firma Alta de Póliza*@
+                                        @if (DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaSoloTomador || DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaTomadorYOtros)
+                                        {
+                                            <th>Fecha límite de aceptación</th>
+                                        }
+
+                                        <th>Visualizar documentación</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+
+                                        for (int i = 0; i < Model.Count(); i++)
+                                        {
+                                            CustomerAccess.FrontEnd.Models.DocumentPendingSignatureModel item = Model[i];
+
+                                            <tr class="text-center">
+                                                <td>@item.DocumentType</td>
+                                                <td>@item.DestinedTo</td>
+                                                <td>@item.DocumentTypeDescription</td>
+
+                                                @*Fecha de emisión del documento.*@
+                                                @*<td>@item.DocumentDate</td>*@
+
+                                                @if (i == 0)
+                                                {
+                                                    //Contiene alta de póliza. Hago una sola columna para la fecha de emisión.
+                                                    if ((DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaSoloTomador ||
+                                                        DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaTomadorYOtros) &&
+                                                        item.DocumentType == 5 && !string.IsNullOrEmpty(item.DocumentName) && !string.IsNullOrEmpty(item.DocumentId))
+                                                    {
+                                                        @*Fecha de emisión de la póliza.*@
+                                                        <td style="vertical-align: middle;" rowspan="@Model.Count">@item.IssueDate</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        @*Fecha de emisión del documento.*@
+                                                        <td style="vertical-align: middle;" rowspan="@Model.Count">@item.DocumentDate</td>
+                                                    }
+
+                                                    <td style="vertical-align: middle;" rowspan="@Model.Count">@item.State</td>
+
+                                                    //Contiene alta de póliza.
+                                                    if (DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaSoloTomador || DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaTomadorYOtros)
+                                                    {
+                                                        <td style="vertical-align: middle;" rowspan="@Model.Count">@item.AcceptanceDeadline</td>
+                                                    }
+
+                                                    //Contiene alta de póliza. Hago una sola columna para el archivo.
+                                                    if ((DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaSoloTomador ||
+                                                        DocumentPendingSignatureType == CustomerAccess.FrontEnd.Models.DocumentPendingSignatureTypeEnum.AltaPólizaTomadorYOtros) &&
+                                                        item.DocumentType == 5 && !string.IsNullOrEmpty(item.DocumentName) && !string.IsNullOrEmpty(item.DocumentId))
+                                                    {
+                                                        <td style="vertical-align: middle;" rowspan="@Model.Count">@Html.ActionLink(item.DocumentName, "GetDocumentLetterFile", "Documentations", new { id = item.DocumentId }, new { target = "_blank" })</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td style="vertical-align: middle;" rowspan="@Model.Count">@Html.ActionLink("<<Comunicaciones>>", "Communications", "Documentations", null, new { target = "_blank" })</td>
+                                                    }
+                                                }
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+                        <button id="btnSignatureOnline" type="button" class="btn btn-success responsive-button">Firmar en conformidad la documentación</button>
+                        @*<button id="btnSignatureOnline" type="button" class="btn btn-success">Firmar en conformidad</button>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal Processing -->
+<div id="loaderModal" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+                <div class="loader">
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-4">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        var policyNumber = '@ViewData["policyNumber"]';
+        var documentIds = @Html.Raw(Json.Encode(Model.Select(x => x.Id).ToList()));
+        $('#btnSignatureOnline').on('click', function() {
+
+            // Muestro el loader.
+            $("#loaderModal").modal('show');
+
+            $.ajax({
+                url: BaseAddress + "SigningOfDocuments/PostSignatureOnline",
+                data: {documentIds: documentIds, policyNumber: policyNumber},
+                dataType: 'json',
+                type: 'POST',
+                success: function (result) {
+
+                    // Oculto el loader.
+                    $("#loaderModal").modal('hide');
+
+                    if (result.Success) {
+
+                        bootbox.alert({
+                            message: "Has aceptado la documentación  necesaria para que tu póliza de seguro permanezca vigente. Numero de gestión asignado: " + result.Data, 
+                            closeButton: false,
+                            callback: function(){ 
+                                window.location.href = BaseAddress + "Policies/Policies";
+                            }
+                        });
+
+                    } 
+                    else {
+                    
+                        bootbox.alert("Error al intentar firmar la documentación.");
+
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+
+                    // Oculto el loader.
+                    $("#loaderModal").modal('hide');
+
+                    bootbox.alert("Error al intentar firmar la documentación.");
+
+                }
+
+            });
+        });
+    });
+
+</script>

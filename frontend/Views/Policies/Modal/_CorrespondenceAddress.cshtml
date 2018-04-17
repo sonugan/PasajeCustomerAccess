@@ -1,0 +1,42 @@
+﻿@model CustomerAccess.Model.Policies.Policies
+
+<div class="modal fade" id="dirModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="modal-title" style="font-weight:bold" id="myModalLabel">Dirección de correspondencia</span>
+            </div>
+            <div class="modal-body">
+                <table id="tblDireccion" class="table table-striped footable dt-responsive nowrap" cellspacing="0">
+                    <thead style="display:none">
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Calle</td>
+                            <td>@Model.MailingAddress</td>
+                        </tr>
+                        <tr>
+                            <td>Localidad</td>
+                            <td>@Model.MailingCity</td>
+                        </tr>
+                        <tr>
+                            <td>CP</td>
+                            <td>@Model.MailingZipcode</td>
+                        </tr>
+                        <tr>
+                            <td>Provincia</td>
+                            <td>@Model.MailingState</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

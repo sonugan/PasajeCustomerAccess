@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNet.Identity
+@if (ViewBag.userName != null && !string.IsNullOrEmpty(ViewBag.userName))
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div id="navbar3" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                @if (!Request.RawUrl.Contains("LoginCustomer"))
+                {
+                    <li><a href='@Url.Action("Policies", "Policies", null)' id="policies">Pólizas</a></li>
+                    <li><a href='@Url.Action("Index", "Transaction", null)' id="transactions">Transacciones</a></li>
+                    <li>
+                        <a href='@Url.Action("Communications", "Documentations", null)' id="communications">
+                            Comunicaciones
+                            <span id="CommunicatiosNotif" class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("GetFormClients", "Documentations", null)' id="formclients">Descarga de Formularios</a>
+                    </li>
+                    <li>
+                        <a href='@Url.Action("GetFaqs", "Documentations", null)' id="faqs">Preguntas Frecuentes</a>
+                    </li>
+                }
+
+
+
+                <li id="menuItemUser" class="dropdown" data-toggle="popover">
+                    <a class="dropdown-toggle" id="usuario" data-toggle="dropdown" href="#">
+                        <span class="glyphicon glyphicon-user"></span>
+                        @*@{
+                            var cookies = FormsAuthentication.Decrypt((Request.Cookies[FormsAuthentication.FormsCookieName]).Value);
+                        } 
+                        @cookies.UserData*@
+                        @*@Session["username"]*@
+                        @ViewBag.userFullName
+                        <span class="caret"></span>
+
+                        <span id="pendingDocumentationNotif" class="badge"></span>
+
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+                    </ul>
+
+                    
+
+                </li>
+            </ul>
+        </div>
+                                }
+                            }
+                            else
+                            {
+                                <div id="navbar3" class="navbar-collapse collapse">
+                                    <ul class="nav navbar-nav navbar-right">
+                                        @*<li>@Html.ActionLink("Registro", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>*@
+                                        @*<li>@Html.ActionLink("Iniciar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+                                    </ul>
+                                </div>
+                            }

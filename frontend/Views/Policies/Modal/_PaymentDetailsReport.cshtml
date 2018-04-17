@@ -1,0 +1,32 @@
+﻿<div class="modal fade" id="detalleDePagoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                <h4 class="modal-title" id="myModalLabel">Detalle de Pagos</h4>
+            </div>
+            <div class="modal-body">
+                <div id="errorMessage">
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label>Desde:</label>
+                        <input type="text" id="txtFechaDesde" class="form-control" placeholder="mm/aaaa" maxlength="10">
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Hasta: </label>
+                        <input type="text" id="txtFechaHasta" class="form-control" placeholder="mm/aaaa" maxlength="10">
+                    </div>
+                    <div class="col-sm-2">
+                        <div style="padding: 24px">
+                            <button id="exportDetallePago" class="btn btn-primary boton-pdf">Exportar a PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

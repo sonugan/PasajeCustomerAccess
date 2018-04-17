@@ -1,0 +1,447 @@
+﻿@model  CustomerAccess.Model.Policies.Policies
+
+<div class="panel panel-default">
+    <div class="panel-heading panel-prud" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseVal" aria-expanded="false" aria-controls="collapseVal" role="tab" id="headingOne">
+        <span class="panel-title">
+            <i id="iconVal" class="indicator glyphicon glyphicon-chevron-down pull-right" data-toggle="collapse" data-parent="#accordion" href="#collapseVal" aria-expanded="false" aria-controls="collapseVal"></i>
+            <a class="titulo-panel">
+                Valores de cuentas y rescates
+            </a>
+        </span>
+    </div>
+    <div id="collapseVal" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+        <div class="panel-body">
+            <div class="panel-group" id="nested">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="contenedor-sub-paneles">
+                            <div class="panel panel-default">
+                                <div class="well well-sm">
+                                    <div class="panel-title">
+                                        Fondos Acumulados:
+                                    </div>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table id="datos5" class="table table-striped dt-responsive" cellspacing="0" width="100%">
+                                        <thead class="display-none">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Principal</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.FundsMainAccount != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.FundsMainAccount)</td>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Adicional</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.FundsAdditional != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.FundsAdditional)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Total</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.TotFunds != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.TotFunds)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="well well-sm">
+                                    <div class="panel-title">
+                                        Rescates:
+                                    </div>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table id="datos6" class="table table-striped dt-responsive" cellspacing="0" width="100%">
+                                        <thead class="display-none">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Principal</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.RescueMainAccount != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.RescueMainAccount)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Adicional</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.RescueAdditional != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.RescueAdditional)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Temporarios</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.RescueTemp != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.RescueTemp)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Prorrogado/Saldado</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.Rescue != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.Rescue)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Total</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.TotRescue != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.TotRescue)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    @{
+                                                        if (string.IsNullOrEmpty(Model.LastRescueAccountUpdate.ToString()))
+                                                        {
+                                                            <label class="fecha-act-margin">Fecha actualización: N/A</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label class="fecha-act-margin">Fecha actualización: @Model.LastRescueAccountUpdate.Value.ToString("dd/MM/yyyy")</label>
+                                                        }
+                                                    }
+
+
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="well well-sm">
+                                    <div class="panel-title">
+                                        Préstamos Tomados:
+                                    </div>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table id="datos7" class="table table-striped dt-responsive" cellspacing="0" width="100%">
+                                        <thead class="display-none">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-md-8">Monto</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.LoanAmount != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.LoanAmount)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    @{
+                                                        if (string.IsNullOrEmpty(Model.LastLoanUpdate.ToString()))
+                                                        {
+                                                            <label class="fecha-act-margin">Fecha actualización: N/A</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label class="fecha-act-margin">Fecha actualización: @Model.LastLoanUpdate.Value.ToString("dd/MM/yyyy")</label>
+                                                        }
+                                                    }
+
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <label>
+                                        <small>
+                                            <br />
+                                            Si hubiera montos de préstamos, deben restarse del valor de rescate total.
+                                        </small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fondos garantizados -->
+                    @if (Model.ShowFondRescGarantizados == 1)
+                    {
+                     <div class="col-sm-6">
+                        <div class="contenedor-sub-paneles">
+                            <div class="panel panel-default">
+                                <div class="well well-sm">
+                                    <div class="panel-title">
+                                        Fondos Garantizados:
+                                    </div>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table id="datos5" class="table table-striped dt-responsive" cellspacing="0" width="100%">
+                                        <thead class="display-none">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Principal</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.FondoGarantCtaPpal != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.FondoGarantCtaPpal)</td>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Adicional</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.FondoGarantCtaAdic != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.FondoGarantCtaAdic)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Total</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.FondosGarantizadosTotal != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.FondosGarantizadosTotal)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="well well-sm">
+                                    <div class="panel-title">
+                                        Rescates Garantizados:
+                                    </div>
+                                </div>
+                                <div class="panel-body no-padding">
+                                    <table id="datos6" class="table table-striped dt-responsive" cellspacing="0" width="100%">
+                                        <thead class="display-none">
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        <tbody>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Principal</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.RescateGarantCtaPpal != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.RescateGarantCtaPpal)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Cuenta Adicional</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.RescateGarantCtaAdic != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.RescateGarantCtaAdic)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Temporarios</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+
+                                                  <td class="col-md-2 text-right">0,00</td>
+                                                    
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Prorrogado/Saldado</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.RescateGarantProrSald != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.RescateGarantProrSald)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-md-8">Total</td>
+                                                <td class="col-md-2 text-right">@Model.Currency</td>
+                                                @{
+                                                    if (@Model.RescatesGarantizadosTotal != null)
+                                                    {
+                                                        <td class="col-md-2 text-right">@String.Format("{0:#,##0.00}", @Model.RescatesGarantizadosTotal)</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td class="col-md-2 text-right">0,00</td>
+                                                    }
+                                                }
+                                                <td class="col-md-2"></td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    @{
+                                                        if (string.IsNullOrEmpty(Model.LastRescueAccountUpdate.ToString()))
+                                                        {
+                                                            <label class="fecha-act-margin">Fecha actualización: N/A</label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label class="fecha-act-margin">Fecha actualización: @Model.LastRescueAccountUpdate.Value.ToString("dd/MM/yyyy")</label>
+                                                        }
+                                                    }
+
+
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

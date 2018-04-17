@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CustomerAccess.Model.Documentations.FormClients>
+
+@{
+    ViewBag.Title = "Descarga de Formularios";
+}
+
+
+<script src="~/Scripts/Views/online-management.js"></script>
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading panel-prud"> <span class="panel-title">Descarga de Formularios</span> </div>
+        <div class="panel-body">
+            <div class="well well-sm ">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label id="texto">Si necesitás realizar alguna de las siguientes modificaciones, podés descargar el formulario, completarlo y enviarlo a nuestro departamento de Atención al Asegurado.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="A">
+                    <table id="tblactivas" class=" table table-striped footable  toggle-circle" data-page-size="100" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th data-hide="phone" class="text-center">Descripción</th>
+                                <th data-hide="phone" class="text-center" data-sort-ignore="true">Descargar</th>
+                                <th data-toggle="true" data-sort-ignore="true"></th>
+                            </tr>
+                        </thead>
+                       
+                        <tbody>
+
+                            @foreach (var item in Model)
+            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Descript)</td>
+                                    <td class="text-center"><a target="_blank" type="submit" class="btn btn-primary" href="byteArrayToFile?id=@item.Id">Descargar</a></td>
+                                    <td></td>
+                                </tr>
+                                        }
+                        </tbody>                        
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

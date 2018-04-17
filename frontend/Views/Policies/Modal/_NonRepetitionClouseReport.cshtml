@@ -1,0 +1,49 @@
+﻿<div class="modal fade" id="nonRepetitionClauseModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                <h4 class="modal-title" id="myModalLabel">Cláusula de no Repetición</h4>
+            </div>
+            <div class="modal-body">
+                <div id="errorMessage">
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Razón Social:</label>
+                        <input type="text" id="txtBusinessName" class="form-control" maxlength="70">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>CUIT: </label>
+                        <input type="text" id="txtCuit" class="form-control" data-mask="00-00000000-0" maxlength="13">
+                    </div>
+                    <div class="col-sm-2">
+                        <div style="padding: 24px">
+                            <button id="addBusiness" class="btn btn-primary boton-pdf">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="height:120px; overflow-y: scroll; overflow-x: hidden;">
+                    <div class="col-sm-12" id="businessList">
+                        <div class="row" id="businessElemen" style="display: none">
+                            <div class="col-sm-1">
+                                <a style="padding: 15px">
+                                    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                                </a>
+                            </div>
+                            <div class="col-sm-10" id="elementLabel"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10" style="text-align: right">
+                        <button id="exportDetallePago" class="btn btn-primary boton-pdf">Exportar a PDF</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

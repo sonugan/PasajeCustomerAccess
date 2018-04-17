@@ -1,0 +1,89 @@
+﻿@model ICollection<CustomerAccess.Model.Documentations.GroupsDocs>
+@{
+    ViewBag.Title = "Comunicaciones";
+}
+
+<link href="~/Content/Views/communications.css" rel="stylesheet">
+
+
+<div class="container">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-prud"> <span class="panel-title">Comunicaciones</span> </div>
+            <div class="panel-body">
+                <div class="panel">
+                    <ul class="nav nav-tabs">
+                        @foreach (var item in Model)
+                        {
+                            var idtab = "idtab" + item.Id;
+                            var spantab = "spantab" + item.Id;
+
+                            if ((bool)item.Default)
+                            {
+                                <li class="nav active">
+                                    <a id="@idtab" onload="OnLoad(@idtab)" class="TabLink Default" onclick="GetDocument(@item.Id)" data-toggle="tab">
+                                        @item.Descript
+                                        <span id="@spantab" class="badge"></span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav">
+                                    <a id="@idtab" onclick="GetDocument(@item.Id)" class="TabLink" data-toggle="tab">
+                                        @item.Descript
+                                        <span id="@spantab" class="badge"></span>
+                                    </a>
+                                </li>
+                            }
+
+                        }
+                    </ul>
+                    <div class="tab-content col-sm-12 dt-center">
+                        <div class="tab-pane fade in active margin-top-10" ng-controller="mainCtrlCommunications" id="tblComunication" style="display:none">
+                            <table st-table="displayed" st-safe-src="rowCollection" class="table @*footable*@  dt-responsive nowrap col-md-12">
+                                <thead ng-show="!isLoading && displayed.length!=0">
+                                    <tr>
+                                        <th st-sort="PolicyNumber">Número de Póliza</th>
+                                        <th @*data-hide="tablet, phone"*@ st-sort="ProccessDate">Fecha</th>
+                                        <th @*data-hide="tablet, phone"*@ st-sort="TypeDocs.Title">Título</th>
+                                        <th @*data-hide="tablet, phone"*@></th>
+                                    </tr>
+                                </thead>
+                                <thead ng-show="!isLoading && displayed.length==0">
+                                    <tr>
+                                        <th colspan="4" class="text-center">
+                                            No existe información a mostrar
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-show="!isLoading">
+                                    <tr ng-repeat="row in displayed" md-row>
+                                        <td class="text-center" cs-select="row" ng-class="{0: 'rowtext', 1: 'rowtextbold'}[GetStyle(row)]">{{row.PolicyNumber}}</td>
+                                        <td class="text-center" ng-class="{0: 'rowtext', 1: 'rowtextbold'}[GetStyle(row)]">{{row.ProccessDate | date:'dd/MM/yyyy'}}</td>
+                                        <td class="text-center" ng-class="{0: 'rowtext', 1: 'rowtextbold'}[GetStyle(row)]">{{row.TypeDocs.Title}}</td>
+                                        <td class="text-center" ng-class="{0: 'rowtext', 1: 'rowtextbold'}[GetStyle(row)]"><a target="_blank" type="submit" class="btn btn-primary" href="GetDocumentLetterFile?id={{row.Id}}">Descargar</a></td>
+                                    </tr>
+                                </tbody>
+                                <tbody ng-show="isLoading">
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            <div class="loading-indicator"> <img src="~/Content/img/page-loader.gif" alt="loading" style="width:30px;height:30px;"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="well well-sm" id="texto1">
+            <label>Aquí encontrarás documentación correspondiente a los últimos 12 meses. En caso de necesitar material de períodos anteriores, podés solicitarlo al departamento de Atención al Asegurado - 0-800-777-PRUD (7783) - atencionalasegurado@prudential.com</label>
+        </div>
+    </div>*@
+</div>
+<script src="@Url.Content("~/Scripts/Views/communications.js")" type="text/javascript"></script>
