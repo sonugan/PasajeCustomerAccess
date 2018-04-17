@@ -1,0 +1,8 @@
+﻿.text-transform-none{
+    text-transform: none
+}
+
+.panel-personal-information {
+    border: 2px;
+    border-radius: 25px;
+}

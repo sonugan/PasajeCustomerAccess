@@ -1,0 +1,17 @@
+﻿.titulo-panel{
+    text-decoration: none !important;
+}
+.contenedor-sub-paneles{
+    width:100%;
+    float:left;
+    display:inline-block;
+    margin-right:50px;
+}
+.sub-panel{
+     background-color:#f5f5f5 !important;
+      color:black !important;
+}
+
+.fecha-act-margin{
+     margin:7px
+}

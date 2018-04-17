@@ -1,0 +1,35 @@
+﻿
+/*Beneficiarios/Detalle de pagos*/
+
+
+.margen-columna {
+    margin-left: -20px;
+}
+
+.margen-tabla {
+    margin-right: 40px;
+}
+
+.margen-label-mostrar {
+    margin-right: -5px;
+    margin-bottom: 15px;
+}
+
+.margen-formgroup {
+    margin-left: 0px !important;
+    margin-right: -5px !important;
+}
+
+.margen-label-registros {
+    margin-bottom: 15px;
+}
+
+/*Solo Detalle de pagos*/
+
+.margen-monedas {
+    padding-left: 40px !important;
+}
+
+.boton-pdf {
+    margin-top: 24px;
+}
