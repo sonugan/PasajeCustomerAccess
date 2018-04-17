@@ -1,7 +1,6 @@
 ﻿
 $(function () {
-
-    //$("table").footable();
+    $("table").footable();
 
     $("#BtnExportPolicies").click(function () {
         var selected = $('#filterpolicies').find(':selected').val();

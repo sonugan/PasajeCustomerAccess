@@ -6,7 +6,7 @@
    <Modules>
     <Module Name="customeraccess.webapi.dll">
      <Messages>
-      <Message TypeName="MarkAssembliesWithAssemblyVersion" Category="Microsoft.Design" CheckId="CA1016" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="NonBreaking">
+      <Message TypeName="MarkAssembliesWithAssemblyVersion" Category="Microsoft.Design" CheckId="CA1016" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="NonBreaking">
        <Issue Certainty="95" Level="Error">Add an AssemblyVersion attribute to 'CustomerAccess.WebApi.dll'.</Issue>
       </Message>
      </Messages>
@@ -15,7 +15,7 @@
        <Types>
         <Type Name="WebApiApplication" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'WebApiApplication' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'HttpApplication'</Issue>
           </Message>
          </Messages>
@@ -26,7 +26,7 @@
        <Types>
         <Type Name="AccountServiceController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'AccountServiceController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ApiController'</Issue>
           </Message>
          </Messages>
@@ -37,7 +37,7 @@
        <Types>
         <Type Name="ClientsServiceController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'ClientsServiceController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ApiController'</Issue>
           </Message>
          </Messages>
@@ -48,7 +48,7 @@
        <Types>
         <Type Name="DocumentationsServiceController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'DocumentationsServiceController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ApiController'</Issue>
           </Message>
          </Messages>
@@ -59,7 +59,7 @@
        <Types>
         <Type Name="PoliciesServiceController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'PoliciesServiceController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ApiController'</Issue>
           </Message>
          </Messages>
@@ -70,7 +70,7 @@
        <Types>
         <Type Name="ProductsServiceController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'ProductsServiceController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ApiController'</Issue>
           </Message>
          </Messages>
@@ -81,7 +81,7 @@
        <Types>
         <Type Name="SigningOfDocumentsServiceController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'SigningOfDocumentsServiceController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ApiController'</Issue>
           </Message>
          </Messages>
@@ -92,7 +92,7 @@
        <Types>
         <Type Name="TransactionServiceController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'TransactionServiceController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ApiController'</Issue>
           </Message>
          </Messages>
@@ -103,14 +103,14 @@
        <Types>
         <Type Name="BasicAuthentication" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'BasicAuthentication' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ActionFilterAttribute', 'FilterAttribute'</Issue>
           </Message>
          </Messages>
         </Type>
         <Type Name="ExceptionHandlingFilter" Kind="Class" Accessibility="Public" ExternallyVisible="True">
          <Messages>
-          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:46Z" FixCategory="DependsOnFix">
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 16:08:01Z" FixCategory="DependsOnFix">
            <Issue Certainty="90" Level="Error">'ExceptionHandlingFilter' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'ExceptionFilterAttribute', 'FilterAttribute'</Issue>
           </Message>
          </Messages>
