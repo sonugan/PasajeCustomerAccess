@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 14.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="14.0">
+ <Targets>
+  <Target Name="C:\proyectos\Prudential\Acceso a Clientes\CustomerAccess-Git\CustomerAccess.FrontEnd\bin\CustomerAccess.FrontEnd.dll">
+   <Modules>
+    <Module Name="customeraccess.frontend.dll">
+     <Messages>
+      <Message TypeName="MarkAssembliesWithAssemblyVersion" Category="Microsoft.Design" CheckId="CA1016" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="NonBreaking">
+       <Issue Certainty="95" Level="Error">Add an AssemblyVersion attribute to 'CustomerAccess.FrontEnd.dll'.</Issue>
+      </Message>
+     </Messages>
+     <Namespaces>
+      <Namespace Name="CustomerAccess.FrontEnd">
+       <Types>
+        <Type Name="JsonDotNetResult" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'JsonDotNetResult' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'JsonResult', 'ActionResult'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="MvcApplication" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'MvcApplication' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'HttpApplication'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="CustomerAccess.FrontEnd.Controllers">
+       <Types>
+        <Type Name="AccountController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'AccountController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="BaseController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'BaseController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="BeneficiariesController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'BeneficiariesController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="ClientController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'ClientController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="ContactController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'ContactController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="Controller" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'Controller' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="DocumentationsController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'DocumentationsController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="ErrorController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'ErrorController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="HomeController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'HomeController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PaymentsController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'PaymentsController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="PoliciesController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'PoliciesController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="ProductController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'ProductController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="SigningOfDocumentsController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'SigningOfDocumentsController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="SiteMinderController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'SiteMinderController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="TransactionController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'TransactionController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+        <Type Name="ValidateMailController" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="DependsOnFix">
+           <Issue Certainty="90" Level="Error">'ValidateMailController' is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: 'Controller', 'ControllerBase'</Issue>
+          </Message>
+         </Messages>
+        </Type>
+       </Types>
+      </Namespace>
+      <Namespace Name="CustomerAccess.FrontEnd.Model">
+       <Types>
+        <Type Name="GenericHttpClient`2" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(System.String)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214" Status="Active" Created="2018-04-17 14:00:47Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalWarning" Path="C:\proyectos\Prudential\Acceso a Clientes\CustomerAccess-Git\CustomerAccess.FrontEnd\Models" File="GenericHttpClient.cs" Line="17">'GenericHttpClient&lt;T, TResourceIdentifier&gt;.GenericHttpClient(string)' contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: &#xD;&#xA;&#xD;&#xA;GenericHttpClient&lt;T, TResourceIdentifier&gt;..ctor(String)&#xD;&#xA;GenericHttpClient&lt;T, TResourceIdentifier&gt;.MakeHttpClient(String):HttpClient</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="ComVisibleTypeBaseTypesShouldBeComVisible" Category="Microsoft.Interoperability" CheckId="CA1405">
+   <Name>COM visible type base types should be COM visible</Name>
+   <Description>COM visible types should have an object hierarchy that is uniformly COM visible.</Description>
+   <Resolution Name="Default">{0} is marked ComVisible(true) but has the following ComVisible(false) types in its object hierarchy: {1}</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182202.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="90">Error</MessageLevel>
+   <File Name="interoperabilityrules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotCallOverridableMethodsInConstructors" Category="Microsoft.Usage" CheckId="CA2214">
+   <Name>Do not call overridable methods in constructors</Name>
+   <Description>Virtual methods defined on the class should not be called from constructors. If a derived class has overridden the method, the derived class version will be called (before the derived class constructor is called).</Description>
+   <Resolution Name="Default">{0} contains a call chain that results in a call to a virtual method defined by the class. Review the following call stack for unintended consequences: {1}</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182331.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalWarning</MessageLevel>
+   <File Name="usagerules.dll" Version="14.0.0.0" />
+  </Rule>
+  <Rule TypeName="MarkAssembliesWithAssemblyVersion" Category="Microsoft.Design" CheckId="CA1016">
+   <Name>Mark assemblies with AssemblyVersionAttribute</Name>
+   <Description>Assemblies should use version numbers. The version number is considered part of an assembly's identity. Versioning is applied by means of the AssemblyVersion attribute.</Description>
+   <Resolution Name="Default">Add an AssemblyVersion attribute to {0}.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182155.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="designrules.dll" Version="14.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Category</String>
+  <String Key="Certainty">Certainty</String>
+  <String Key="CollapseAll">Collapse All</String>
+  <String Key="CheckId">Check Id</String>
+  <String Key="Error">Error</String>
+  <String Key="Errors">error(s)</String>
+  <String Key="ExpandAll">Expand All</String>
+  <String Key="Help">Help</String>
+  <String Key="Line">Line</String>
+  <String Key="Messages">message(s)</String>
+  <String Key="LocationNotStoredInPdb">[Location not stored in Pdb]</String>
+  <String Key="Project">Project</String>
+  <String Key="Resolution">Resolution</String>
+  <String Key="Rule">Rule</String>
+  <String Key="RuleFile">Rule File</String>
+  <String Key="RuleDescription">Rule Description</String>
+  <String Key="Source">Source</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Target</String>
+  <String Key="Warning">Warning</String>
+  <String Key="Warnings">warning(s)</String>
+  <String Key="ReportTitle">Code Analysis Report</String>
+ </Localized>
+</FxCopReport>
